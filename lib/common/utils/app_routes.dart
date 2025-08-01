@@ -1,11 +1,10 @@
-
 import 'package:fashionapp/src/entrypoint/views/entrypointscreen__page.dart';
+import 'package:fashionapp/src/onboarding/views/onboarding__page.dart';
 import 'package:fashionapp/src/splashscreen/views/splashscreen__page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
 
 final GoRouter _router = GoRouter(
   navigatorKey: navigatorKey,
@@ -19,10 +18,10 @@ final GoRouter _router = GoRouter(
       path: '/home',
       builder: (context, state) => const AppEntryPoint(),
     ),
-    // GoRoute(
-    //   path: '/onboarding',
-    //   builder: (context, state) => const OnBoardingScreen(),
-    // ),
+    GoRoute(
+      path: '/onboarding',
+      builder: (context, state) => const OnBoardingScreen(),
+    ),
     // GoRoute(
     //   path: '/review',
     //   builder: (context, state) => const ReviewsPage(),

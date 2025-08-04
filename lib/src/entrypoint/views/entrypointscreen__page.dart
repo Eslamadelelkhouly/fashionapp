@@ -48,35 +48,62 @@ class AppEntryPoint extends StatelessWidget {
                     },
                     items: [
                       BottomNavigationBarItem(
-                        icon: Icon(
-                          AntDesign.home,
-                          color: Kolors.kPrimary,
-                          size: 24,
-                        ),
+                        icon: TabIndexNotifier.currentIndex == 0
+                            ? Icon(
+                                AntDesign.home,
+                                color: Kolors.kPrimary,
+                                size: 24,
+                              )
+                            : Icon(
+                                AntDesign.home,
+                                size: 24,
+                              ),
                         label: 'Home',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(
-                          Ionicons.heart_outline,
-                          color: Kolors.kPrimary,
-                          size: 24,
-                        ),
+                        icon: TabIndexNotifier.currentIndex == 1
+                            ? Icon(
+                                Ionicons.heart,
+                                color: Kolors.kPrimary,
+                                size: 24,
+                              )
+                            : Icon(
+                                Ionicons.heart_outline,
+                                color: Kolors.kPrimary,
+                                size: 24,
+                              ),
                         label: 'Favourite',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(
-                          MaterialCommunityIcons.shopping_outline,
-                          color: Kolors.kPrimary,
-                          size: 24,
-                        ),
+                        icon: TabIndexNotifier.currentIndex == 2
+                            ? Badge(
+                                label: Text('9'),
+                                child: Icon(
+                                  MaterialCommunityIcons.shopping,
+                                  color: Kolors.kPrimary,
+                                  size: 24,
+                                ),
+                              )
+                            : Badge(
+                                label: Text('9'),
+                                child: Icon(
+                                  MaterialCommunityIcons.shopping_outline,
+                                  size: 24,
+                                ),
+                              ),
                         label: 'Cart',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(
-                          EvilIcons.user,
-                          color: Kolors.kPrimary,
-                          size: 34,
-                        ),
+                        icon: TabIndexNotifier.currentIndex == 3
+                            ? Icon(
+                                EvilIcons.user,
+                                color: Kolors.kPrimary,
+                                size: 34,
+                              )
+                            : Icon(
+                                EvilIcons.user,
+                                size: 34,
+                              ),
                         label: 'Profile',
                       ),
                     ],

@@ -1,6 +1,7 @@
 import 'package:fashionapp/src/auth/views/login_screen.dart';
 import 'package:fashionapp/src/entrypoint/views/entrypointscreen__page.dart';
 import 'package:fashionapp/src/onboarding/views/onboarding__page.dart';
+import 'package:fashionapp/src/search/views/search_view.dart';
 import 'package:fashionapp/src/splashscreen/views/splashscreen__page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -35,10 +36,10 @@ final GoRouter _router = GoRouter(
     //   path: '/verification',
     //   builder: (context, state) => const VerificationPage(),
     // ),
-    // GoRoute(
-    //   path: '/search',
-    //   builder: (context, state) => const SearchPage(),
-    // ),
+    GoRoute(
+      path: '/search',
+      builder: (context, state) => const SearchPage(),
+    ),
     // GoRoute(
     //   path: '/help',
     //   builder: (context, state) => const HelpCenterPage(),

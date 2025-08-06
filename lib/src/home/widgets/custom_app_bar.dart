@@ -1,3 +1,4 @@
+import 'package:fashionapp/common/utils/app_routes.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -56,6 +58,69 @@ class CustomAppBar extends StatelessWidget {
       actions: [
         NotificationWidget(),
       ],
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(55.h),
+        child: GestureDetector(
+          onTap: () {
+            context.go('/search');
+          },
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 12.0.h,
+              vertical: 8.h,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 40.h,
+                  width: ScreenUtil().screenWidth - 80,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 0.5.h,
+                      color: Kolors.kGrayLight,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 12.0.h, vertical: 8.h),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Ionicons.search,
+                          size: 20,
+                          color: Kolors.kPrimary,
+                        ),
+                        SizedBox(
+                          width: 20.w,
+                        ),
+                        ReusableText(
+                          text: 'Search Product',
+                          style: appStyle(14, Kolors.kGray, FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 40.h,
+                  width: 40.h,
+                  decoration: BoxDecoration(
+                    color: Kolors.kPrimary,
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+                  child: Icon(
+                    FontAwesome.sliders,
+                    color: Kolors.kWhite,
+                    size: 20,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

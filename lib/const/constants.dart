@@ -1,4 +1,5 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
+import 'package:fashionapp/const/resource.dart';
 import 'package:flutter/material.dart';
 
 LinearGradient kGradient = const LinearGradient(
@@ -11,7 +12,7 @@ LinearGradient kGradient = const LinearGradient(
   ],
 );
 
-LinearGradient kPGradient =  LinearGradient(
+LinearGradient kPGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
   colors: [
@@ -47,16 +48,13 @@ BorderRadiusGeometry kRadiusBottom = const BorderRadius.only(
   bottomRight: Radius.circular(12),
 );
 
-
-
 Widget Function(BuildContext, String)? placeholder = (p0, p1) => Image.asset(
-      'assets/images/placeholder.webp',
+      R.ASSETS_IMAGES_PLACEHOLDER_WEBP,
       fit: BoxFit.cover,
     );
 
 Widget Function(BuildContext, String, Object)? errorWidget =
     (p0, p1, p3) => Image.asset(
-          'assets/images/placeholder.webp',
+          R.ASSETS_IMAGES_PLACEHOLDER_WEBP,
           fit: BoxFit.cover,
         );
-

@@ -82,8 +82,3 @@ class HomeSlider extends StatelessWidget {
   }
 }
 
-List<String> images = [
-  'https://as2.ftcdn.net/jpg/03/67/56/57/1000_F_367565758_Jw4B5XL7wdPekEWywKPihQbwwzC9B1ZL.jpg',
-  'https://as2.ftcdn.net/jpg/04/15/97/33/1000_F_415973312_5yg3MrkRdi2SMHyVKbB4h7GgE5HrgUlb.jpg',
-  'http://as2.ftcdn.net/jpg/04/78/75/27/1000_F_478752729_bvtlb01LHcdjCOWvuS35GUbcnlP8ynpp.jpg',
-];

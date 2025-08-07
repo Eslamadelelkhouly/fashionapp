@@ -1,4 +1,6 @@
 import 'package:fashionapp/src/auth/views/login_screen.dart';
+import 'package:fashionapp/src/category/views/category_page.dart';
+import 'package:fashionapp/src/category/views/category_screen.dart';
 import 'package:fashionapp/src/entrypoint/views/entrypointscreen__page.dart';
 import 'package:fashionapp/src/onboarding/views/onboarding__page.dart';
 import 'package:fashionapp/src/search/views/search_view.dart';
@@ -18,7 +20,7 @@ final GoRouter _router = GoRouter(
     ),
     GoRoute(
       path: '/home',
-      builder: (context, state) =>  AppEntryPoint(),
+      builder: (context, state) => AppEntryPoint(),
     ),
     GoRoute(
       path: '/onboarding',
@@ -56,14 +58,14 @@ final GoRouter _router = GoRouter(
     //   path: '/register',
     //   builder: (context, state) => const RegistrationPage(),
     // ),
-    // GoRoute(
-    //   path: '/categories',
-    //   builder: (context, state) => const CategoriesPage(),
-    // ),
-    //  GoRoute(
-    //   path: '/category',
-    //   builder: (context, state) => const CategoryPage(),
-    // ),
+    GoRoute(
+      path: '/categories',
+      builder: (context, state) => const CategoryScreen(),
+    ),
+    GoRoute(
+      path: '/category',
+      builder: (context, state) => const CategoryPage(),
+    ),
 
     // GoRoute(
     //   path: '/addaddress',

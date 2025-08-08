@@ -11,4 +11,5 @@ class Kolors {
   static const Color kOffWhite = Color(0xFFF3F4F8);
   static const Color kGold = Color(0xFFFFC107);
   static const Color kRed = Color(0xFFC80000);
+
 }

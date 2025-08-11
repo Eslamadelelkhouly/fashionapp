@@ -7,6 +7,7 @@ import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/main.dart';
 import 'package:fashionapp/src/products/controller/products_notifier.dart';
 import 'package:fashionapp/src/products/widgets/expanded_text.dart';
+import 'package:fashionapp/src/products/widgets/similar_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -117,6 +118,59 @@ class ProductsScreen extends StatelessWidget {
                 padding: EdgeInsets.all(8),
                 child: ExpandedText(text: productnotifier.product!.description),
               ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: Divider(
+                  thickness: .5.h,
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 10.h,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: ReusableText(
+                  text: "Select Size",
+                  style: appStyle(16, Kolors.kDark, FontWeight.w600),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 10.h,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: ReusableText(
+                  text: "Select Color",
+                  style: appStyle(16, Kolors.kDark, FontWeight.w600),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 10.h,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: ReusableText(
+                  text: "Select Product",
+                  style: appStyle(16, Kolors.kDark, FontWeight.w600),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SimilarProduct(),
             ),
           ],
         ),

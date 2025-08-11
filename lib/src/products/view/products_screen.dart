@@ -6,6 +6,7 @@ import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/main.dart';
 import 'package:fashionapp/src/products/controller/products_notifier.dart';
+import 'package:fashionapp/src/products/widgets/expanded_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -95,6 +96,26 @@ class ProductsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 10.h,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: ReusableText(
+                  text: productnotifier.product!.title,
+                  style: appStyle(16, Kolors.kDark, FontWeight.w600),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: ExpandedText(text: productnotifier.product!.description),
               ),
             ),
           ],

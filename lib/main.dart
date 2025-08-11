@@ -5,6 +5,7 @@ import 'package:fashionapp/src/category/controller/category_notifier.dart';
 import 'package:fashionapp/src/entrypoint/controller/bottom_tab_notifier.dart';
 import 'package:fashionapp/src/home/controller/home_tab_notifier.dart';
 import 'package:fashionapp/src/onboarding/controller/onboarding_notifier.dart';
+import 'package:fashionapp/src/products/controller/products_notifier.dart';
 import 'package:fashionapp/src/splashscreen/views/splashscreen__page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -33,6 +34,9 @@ void main() async {
         ),
         ChangeNotifierProvider<HomeTabNotifier>(
           create: (_) => HomeTabNotifier(),
+        ),
+        ChangeNotifierProvider<ProductsNotifier>(
+          create: (_) => ProductsNotifier(),
         ),
       ],
       child: const MyApp(),

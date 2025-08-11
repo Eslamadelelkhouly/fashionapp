@@ -1,13 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fashionapp/common/services/storage.dart';
+import 'package:fashionapp/common/utils/app_routes.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/src/product/models/product_model.dart';
+import 'package:fashionapp/src/products/controller/products_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class StagredTitleWidget extends StatelessWidget {
   const StagredTitleWidget(
@@ -19,7 +23,10 @@ class StagredTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String? accessToken = Storage().getString('accessToken');
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        context.read<ProductsNotifier>().setProduct(product);
+        context.push('/product/${product.id}');
+      },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Container(
@@ -40,12 +47,15 @@ class StagredTitleWidget extends StatelessWidget {
                     Positioned(
                       right: 10.h,
                       top: 10.h,
-                      child: CircleAvatar(
-                        backgroundColor: Kolors.kSecondaryLight,
-                        child: Icon(
-                          AntDesign.heart,
-                          color: Kolors.kRed,
-                          size: 18,
+                      child: GestureDetector(
+                        onTap: onTab,
+                        child: CircleAvatar(
+                          backgroundColor: Kolors.kSecondaryLight,
+                          child: Icon(
+                            AntDesign.heart,
+                            color: Kolors.kRed,
+                            size: 18,
+                          ),
                         ),
                       ),
                     ),

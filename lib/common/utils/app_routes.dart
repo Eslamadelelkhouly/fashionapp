@@ -3,6 +3,7 @@ import 'package:fashionapp/src/category/views/category_page.dart';
 import 'package:fashionapp/src/category/views/category_screen.dart';
 import 'package:fashionapp/src/entrypoint/views/entrypointscreen__page.dart';
 import 'package:fashionapp/src/onboarding/views/onboarding__page.dart';
+import 'package:fashionapp/src/products/view/products_screen.dart';
 import 'package:fashionapp/src/search/views/search_view.dart';
 import 'package:fashionapp/src/splashscreen/views/splashscreen__page.dart';
 import 'package:flutter/material.dart';
@@ -102,13 +103,13 @@ final GoRouter _router = GoRouter(
     //   builder: (context, state) => const FailedPayment(),
     // ),
 
-    // GoRoute(
-    //   path: '/product/:id',
-    //   builder: (BuildContext context, GoRouterState state) {
-    //     final productId = state.pathParameters['id'];
-    //     return ProductPage(productId: productId.toString());
-    //   },
-    // ),
+    GoRoute(
+      path: '/product/:id',
+      builder: (BuildContext context, GoRouterState state) {
+        final productId = state.pathParameters['id'];
+        return ProductsScreen(productId: productId.toString());
+      },
+    ),
   ],
 );
 

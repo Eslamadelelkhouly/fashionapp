@@ -5,6 +5,7 @@ import 'package:fashionapp/common/widgets/back_button.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/main.dart';
+import 'package:fashionapp/src/product/widgets/product_sizes_widget.dart';
 import 'package:fashionapp/src/products/controller/products_notifier.dart';
 import 'package:fashionapp/src/products/widgets/expanded_text.dart';
 import 'package:fashionapp/src/products/widgets/similar_product.dart';
@@ -142,8 +143,9 @@ class ProductsScreen extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(
-              child: SizedBox(
-                height: 10.h,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ProductSizesWidget(),
               ),
             ),
             SliverToBoxAdapter(

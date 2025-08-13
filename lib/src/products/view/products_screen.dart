@@ -1,10 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fashionapp/common/services/storage.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
+import 'package:fashionapp/common/utils/kstrings.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/back_button.dart';
+import 'package:fashionapp/common/widgets/error_modal.dart';
+import 'package:fashionapp/common/widgets/login_bottom_sheet.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/main.dart';
+import 'package:fashionapp/src/products/controller/color_sized_notifier.dart';
+import 'package:fashionapp/src/products/widgets/product_bottom_bar.dart';
 import 'package:fashionapp/src/products/widgets/product_color_widget.dart';
 import 'package:fashionapp/src/products/widgets/product_sizes_widget.dart';
 import 'package:fashionapp/src/products/controller/products_notifier.dart';
@@ -22,6 +28,7 @@ class ProductsScreen extends StatelessWidget {
   final String productId;
   @override
   Widget build(BuildContext context) {
+    String? accessToken = Storage().getString('accessToken');
     print(context.read<ProductsNotifier>().product!.title);
     return Consumer<ProductsNotifier>(
         builder: (context, productnotifier, child) {
@@ -187,6 +194,24 @@ class ProductsScreen extends StatelessWidget {
               child: SimilarProduct(),
             ),
           ],
+        ),
+        bottomNavigationBar: ProductBottomBar(
+          onPressed: () {
+            if (accessToken == null) {
+              loginBottomSheet(context);
+            } else {
+              if (context.read<ColorSizedNotifier>().color == '' ||
+                  context.read<ColorSizedNotifier>().size == '') {
+                showErrorPopup(
+                  context,
+                  AppText.kCartErrorText,
+                  'Error Adding to cart',
+                  true,
+                );
+              } else {}
+            }
+          },
+          price: productnotifier.product!.price.toStringAsFixed(2),
         ),
       );
     });

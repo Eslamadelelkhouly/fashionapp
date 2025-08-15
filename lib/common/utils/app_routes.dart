@@ -4,6 +4,9 @@ import 'package:fashionapp/src/category/views/category_screen.dart';
 import 'package:fashionapp/src/entrypoint/views/entrypointscreen__page.dart';
 import 'package:fashionapp/src/onboarding/views/onboarding__page.dart';
 import 'package:fashionapp/src/products/view/products_screen.dart';
+import 'package:fashionapp/src/profile/views/orders_screen.dart';
+import 'package:fashionapp/src/profile/views/policy_screen.dart';
+import 'package:fashionapp/src/profile/views/shipping_address.dart';
 import 'package:fashionapp/src/search/views/search_view.dart';
 import 'package:fashionapp/src/splashscreen/views/splashscreen__page.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +34,10 @@ final GoRouter _router = GoRouter(
     //   path: '/review',
     //   builder: (context, state) => const ReviewsPage(),
     // ),
-    // GoRoute(
-    //   path: '/policy',
-    //   builder: (context, state) => const PolicyPage(),
-    // ),
+    GoRoute(
+      path: '/policy',
+      builder: (context, state) => const PolicyScreen(),
+    ),
     // GoRoute(
     //   path: '/verification',
     //   builder: (context, state) => const VerificationPage(),
@@ -47,10 +50,10 @@ final GoRouter _router = GoRouter(
     //   path: '/help',
     //   builder: (context, state) => const HelpCenterPage(),
     // ),
-    // GoRoute(
-    //   path: '/orders',
-    //   builder: (context, state) => const OrdersPage(),
-    // ),
+    GoRoute(
+      path: '/orders',
+      builder: (context, state) => const OrdersScreen(),
+    ),
     GoRoute(
       path: '/login',
       builder: (context, state) => const LoginScreen(),
@@ -68,10 +71,10 @@ final GoRouter _router = GoRouter(
       builder: (context, state) => const CategoryPage(),
     ),
 
-    // GoRoute(
-    //   path: '/addaddress',
-    //   builder: (context, state) => const AddAddress(),
-    // ),
+    GoRoute(
+      path: '/addaddress',
+      builder: (context, state) => const ShippingAddress(),
+    ),
 
     // GoRoute(
     //   path: '/addresses',

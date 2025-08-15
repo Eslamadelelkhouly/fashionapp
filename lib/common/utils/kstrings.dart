@@ -17,7 +17,7 @@ class AppText {
   static const String kSearch = 'Search';
 
   static const String kProfilePic =
-      'https://d326fntlu7tb1e.cloudfront.net/uploads/0856609b-21e8-4e73-85cb-1f9a93de81f4-avatar.png';
+      'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?_gl=1*grlr0s*_ga*MTUzNDE0NDc4MS4xNzUyNTI2MTgy*_ga_8JE65Q40S6*czE3NTUxMDM5MzUkbzIkZzEkdDE3NTUxMDM5NDckajQ4JGwwJGgw';
 
   static const String kCollection = 'New Collection';
   static const String kPolicy = 'Privacy Policy';

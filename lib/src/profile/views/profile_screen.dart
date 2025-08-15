@@ -1,9 +1,11 @@
+import 'package:fashionapp/common/services/storage.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/utils/kstrings.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/custom_button.dart';
 import 'package:fashionapp/common/widgets/help_bottom_sheet.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
+import 'package:fashionapp/src/auth/views/login_screen.dart';
 import 'package:fashionapp/src/profile/widgets/profile_tiel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +17,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? accessToken = Storage().getString('accessToken');
+    if (accessToken == null) {
+      return LoginScreen();
+    }
     return Scaffold(
         body: ListView(
       children: [

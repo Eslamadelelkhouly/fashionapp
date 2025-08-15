@@ -72,7 +72,7 @@ class AppEntryPoint extends StatelessWidget {
                                 color: Kolors.kPrimary,
                                 size: 24,
                               ),
-                        label: 'Favourite',
+                        label: 'Wishlist',
                       ),
                       BottomNavigationBarItem(
                         icon: TabIndexNotifier.currentIndex == 2

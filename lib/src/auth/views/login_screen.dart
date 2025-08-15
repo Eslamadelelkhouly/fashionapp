@@ -1,3 +1,4 @@
+import 'package:fashionapp/common/utils/app_routes.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/back_button.dart';
@@ -7,6 +8,7 @@ import 'package:fashionapp/common/widgets/password_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,15 +18,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late final TextEditingController _usernameController =
-      TextEditingController();
+  late final TextEditingController _emailController = TextEditingController();
   late final TextEditingController _passwordController =
       TextEditingController();
   final FocusNode _passwordFocusNode = FocusNode();
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     _passwordFocusNode.dispose();
     super.dispose();
@@ -36,7 +37,11 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: AppBackButton(),
+        leading: AppBackButton(
+          onTap: () {
+            context.go('/home');
+          },
+        ),
         elevation: 0,
       ),
       body: ListView(
@@ -67,9 +72,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 EmailTextField(
                   radius: 25,
                   focusNode: _passwordFocusNode,
-                  hintText: 'Username',
-                  controller: _usernameController,
-                  prefixIcon: Icon(CupertinoIcons.person),
+                  hintText: 'Email',
+                  controller: _emailController,
+                  prefixIcon: Icon(CupertinoIcons.mail),
                   keyboardType: TextInputType.name,
                   onEditingComplete: () {
                     FocusScope.of(context).requestFocus(_passwordFocusNode);
@@ -90,13 +95,30 @@ class _LoginScreenState extends State<LoginScreen> {
                   onTap: () {},
                   text: 'L O G I N',
                   btnWidth: ScreenUtil().screenWidth,
-                  btnHieght: 35,
+                  btnHieght: 40,
                   radius: 20,
                 ),
               ],
             ),
-          )
+          ),
         ],
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 130.h,
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 110.h),
+            child: GestureDetector(
+              onTap: () {
+                context.push('/register');
+              },
+              child: Text(
+                'Do not have an account? Register a new one',
+                style: appStyle(12, Colors.blue, FontWeight.normal),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

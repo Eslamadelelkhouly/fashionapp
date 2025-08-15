@@ -1,4 +1,5 @@
 import 'package:fashionapp/src/auth/views/login_screen.dart';
+import 'package:fashionapp/src/auth/views/register_screen.dart';
 import 'package:fashionapp/src/category/views/category_page.dart';
 import 'package:fashionapp/src/category/views/category_screen.dart';
 import 'package:fashionapp/src/entrypoint/views/entrypointscreen__page.dart';
@@ -58,10 +59,10 @@ final GoRouter _router = GoRouter(
       path: '/login',
       builder: (context, state) => const LoginScreen(),
     ),
-    // GoRoute(
-    //   path: '/register',
-    //   builder: (context, state) => const RegistrationPage(),
-    // ),
+    GoRoute(
+      path: '/register',
+      builder: (context, state) => const RegisterScreen(),
+    ),
     GoRoute(
       path: '/categories',
       builder: (context, state) => const CategoryScreen(),

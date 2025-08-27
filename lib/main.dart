@@ -1,6 +1,7 @@
 import 'package:fashionapp/common/utils/app_routes.dart';
 import 'package:fashionapp/common/utils/environment.dart';
 import 'package:fashionapp/common/utils/kstrings.dart';
+import 'package:fashionapp/src/auth/controller/auth_notifier.dart';
 import 'package:fashionapp/src/auth/controller/password_notifier.dart';
 import 'package:fashionapp/src/category/controller/category_notifier.dart';
 import 'package:fashionapp/src/entrypoint/controller/bottom_tab_notifier.dart';
@@ -45,6 +46,9 @@ void main() async {
         ),
         ChangeNotifierProvider<PasswordNotifier>(
           create: (_) => PasswordNotifier(),
+        ),
+        ChangeNotifierProvider<AutthNotifier>(
+          create: (_) => AutthNotifier(),
         ),
       ],
       child: const MyApp(),

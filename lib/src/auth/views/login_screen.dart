@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fashionapp/common/utils/app_routes.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
@@ -5,10 +7,13 @@ import 'package:fashionapp/common/widgets/back_button.dart';
 import 'package:fashionapp/common/widgets/custom_button.dart';
 import 'package:fashionapp/common/widgets/email_textfield.dart';
 import 'package:fashionapp/common/widgets/password_field.dart';
+import 'package:fashionapp/src/auth/controller/auth_notifier.dart';
+import 'package:fashionapp/src/auth/models/login_models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -74,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   focusNode: _passwordFocusNode,
                   hintText: 'Email',
                   controller: _emailController,
-                  prefixIcon: Icon(CupertinoIcons.mail),
+                  prefixIcon: Icon(CupertinoIcons.person_alt_circle),
                   keyboardType: TextInputType.name,
                   onEditingComplete: () {
                     FocusScope.of(context).requestFocus(_passwordFocusNode);
@@ -91,13 +96,27 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 20.h,
                 ),
-                GradientBtn(
-                  onTap: () {},
-                  text: 'L O G I N',
-                  btnWidth: ScreenUtil().screenWidth,
-                  btnHieght: 40,
-                  radius: 20,
-                ),
+                context.watch<AutthNotifier>().isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: Kolors.kPrimary,
+                          valueColor: AlwaysStoppedAnimation(Kolors.kWhite),
+                        ),
+                      )
+                    : GradientBtn(
+                        onTap: () {
+                          LoginModel model = LoginModel(
+                            username: _emailController.text.trim(),
+                            password: _passwordController.text.trim(),
+                          );
+                          log(model.toString());
+                          context.read<AutthNotifier>().login(model, context);
+                        },
+                        text: 'L O G I N',
+                        btnWidth: ScreenUtil().screenWidth,
+                        btnHieght: 40,
+                        radius: 20,
+                      ),
               ],
             ),
           ),

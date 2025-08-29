@@ -19,17 +19,25 @@ class AutthNotifier with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  void setLoading() {
-    _isLoading = !_isLoading;
+  void setLoading(bool v) {
+    _isLoading = v;
+    notifyListeners();
+  }
+
+  bool _RisLoading = false;
+  bool get RisLoading => _RisLoading;
+
+  void setRLoading() {
+    _RisLoading = !_RisLoading;
     notifyListeners();
   }
 
   void login(LoginModel data, BuildContext ctx) async {
-    setLoading();
+    setLoading(true);
     try {
       log(data.toJson().toString());
       var url =
-          Uri.parse('https://b2292217954e.ngrok-free.app/auth/token/login');
+          Uri.parse('https://e3de4c90d903.ngrok-free.app/auth/token/login');
       var response = await http.post(
         url,
         headers: {
@@ -44,22 +52,21 @@ class AutthNotifier with ChangeNotifier {
         String accessToken = TokenModel.fromJson(jsonResponse).authToken;
         log('Login successful. Token: $accessToken');
         getUser(accessToken, ctx);
-        setLoading();
+        setLoading(false);
         ctx.push('/home');
       }
     } catch (e) {
       log(e.toString());
-      setLoading();
+      setLoading(false);
       showErrorPopup(ctx, AppText.kErrorLogin, null, null);
-      setLoading();
     }
   }
 
   void register(RegisterModel data, BuildContext ctx) async {
-    setLoading();
+    setRLoading();
     try {
       log(data.toJson().toString());
-      var url = Uri.parse('https://b2292217954e.ngrok-free.app/auth/users/');
+      var url = Uri.parse('https://e3de4c90d903.ngrok-free.app/auth/users/');
       log(url.toString());
       var response = await http.post(
         url,
@@ -72,9 +79,10 @@ class AutthNotifier with ChangeNotifier {
       log(response.body.toString());
       if (response.statusCode == 201) {
         log('Registration successful.');
-        setLoading();
-        ctx.push('/login');
+        setRLoading();
+        ctx.pop();
       } else if (response.statusCode == 400) {
+        setRLoading();
         var data = jsonDecode(response.body);
         showErrorPopup(
           ctx,
@@ -82,20 +90,18 @@ class AutthNotifier with ChangeNotifier {
           null,
           null,
         );
-        setLoading();
       }
     } catch (e) {
       log(e.toString());
-      setLoading();
+      setRLoading();
       showErrorPopup(ctx, AppText.kErrorLogin, null, null);
-      setLoading();
     }
   }
 
   void getUser(String accessToken, BuildContext ctx) async {
-    setLoading();
+    setLoading(true);
     try {
-      var url = Uri.parse('https://b2292217954e.ngrok-free.app/auth/users/me');
+      var url = Uri.parse('https://e3de4c90d903.ngrok-free.app/auth/users/me');
       var response = await http.get(
         url,
         headers: {
@@ -107,26 +113,25 @@ class AutthNotifier with ChangeNotifier {
       log(response.body.toString());
       if (response.statusCode == 200) {
         Storage().setString('accessToken', accessToken);
+        setLoading(false);
         log('get user successful:  ${response.body.toString()}');
         Storage().setString(accessToken, response.body);
         log('get user successful. Token: $accessToken');
         ctx.read<TabNotifier>().setcurrentIndex(0);
         ctx.go('/home');
-        setLoading();
       }
     } catch (e) {
       log(e.toString());
-      setLoading();
+      setLoading(false);
       showErrorPopup(ctx, AppText.kErrorLogin, null, null);
-      setLoading();
     }
   }
 
-  ProfileModel? getUserData(){
+  ProfileModel? getUserData() {
     String? accessToken = Storage().getString('accessToken');
-    if(accessToken != null){
+    if (accessToken != null) {
       String? userData = Storage().getString(accessToken);
-      if(userData != null){
+      if (userData != null) {
         final Map<String, dynamic> jsonResponse = jsonDecode(userData);
         return ProfileModel.fromJson(jsonResponse);
       }

@@ -108,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(
                   height: 20.h,
                 ),
-                context.watch<AutthNotifier>().isLoading
+                context.watch<AutthNotifier>().RisLoading
                     ? Center(
                         child: CircularProgressIndicator(
                           backgroundColor: Kolors.kPrimary,

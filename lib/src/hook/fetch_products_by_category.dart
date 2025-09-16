@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fashionapp/src/hook/result/category_products_results.dart';
 import 'package:fashionapp/src/product/models/product_model.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -13,14 +15,17 @@ FetchProduct fetchProductsByCategories(int categoryId) {
 
     try {
       Uri url = Uri.parse(
-          'https://c30581ea7801.ngrok-free.app//api/products/category/?category=$categoryId');
+          'https://5bfc1d6dc511.ngrok-free.app/api/products/category/?category=$categoryId');
 
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
+        log(response.body.toString());
         products.value = productsFromJson(response.body);
+        log(products.value.toString());
       }
     } catch (e) {
+      log(e.toString());
       error.value = e.toString();
     } finally {
       isLoading.value = false;

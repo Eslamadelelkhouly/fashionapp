@@ -11,7 +11,7 @@ FetchCategories fetchCategories() {
     isLoading.value = true;
     try {
       Uri url = Uri.parse(
-          'https://cd3e61ca4a71.ngrok-free.app/api/products/categories/');
+          'https://5bfc1d6dc511.ngrok-free.app/api/products/categories/');
       final response = await http.get(url);
       if (response.statusCode == 200) {
         categories.value = categoriesFromJson(response.body);

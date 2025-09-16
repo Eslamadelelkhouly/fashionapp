@@ -45,9 +45,15 @@ class Products {
         isFeatured: json["is_featured"],
         clothesType: json["clothesType"],
         ratings: json["ratings"]?.toDouble(),
-        colors: List<String>.from(json["colors"].map((x) => x)),
-        imageUrls: List<String>.from(json["imageUrls"].map((x) => x)),
-        sizes: List<String>.from(json["sizes"].map((x) => x)),
+        colors: json["colors"] == null
+            ? []
+            : List<String>.from(json["colors"].map((x) => x)),
+        imageUrls: json["imageUrl"] == null
+            ? []
+            : List<String>.from(json["imageUrl"].map((x) => x)),
+        sizes: json["sizes"] == null
+            ? []
+            : List<String>.from(json["sizes"].map((x) => x)),
         createdAt: DateTime.parse(json["created_at"]),
         category: json["category"],
         brand: json["brand"],
@@ -62,7 +68,7 @@ class Products {
         "clothesType": clothesType,
         "ratings": ratings,
         "colors": List<dynamic>.from(colors.map((x) => x)),
-        "imageUrls": List<dynamic>.from(imageUrls.map((x) => x)),
+        "imageUrl": List<dynamic>.from(imageUrls.map((x) => x)),
         "sizes": List<dynamic>.from(sizes.map((x) => x)),
         "created_at": createdAt.toIso8601String(),
         "category": category,

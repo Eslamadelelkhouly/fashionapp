@@ -5,7 +5,7 @@ import 'package:fashionapp/src/product/models/product_model.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
 
-FetchProduct fetchProductsByCategories(int categoryId) {
+FetchProduct fetchsimilarproduct(int categoryId) {
   final products = useState<List<Products>>([]);
   final isLoading = useState(false);
   final error = useState<String?>(null);
@@ -15,7 +15,7 @@ FetchProduct fetchProductsByCategories(int categoryId) {
 
     try {
       Uri url = Uri.parse(
-          'https://da4b9fc68b93.ngrok-free.app/api/products/category/?category=$categoryId');
+          'https://da4b9fc68b93.ngrok-free.app/api/products/recommedations/?category=$categoryId');
 
       final response = await http.get(url);
 

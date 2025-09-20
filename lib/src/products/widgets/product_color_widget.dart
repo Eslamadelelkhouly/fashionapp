@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
@@ -22,6 +24,7 @@ class ProductColorWidget extends StatelessWidget {
             (index) {
               String c =
                   context.read<ProductsNotifier>().product!.colors[index];
+              log(c.toString());
               return GestureDetector(
                 onTap: () {
                   controller.setColor(c);

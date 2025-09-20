@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fashionapp/common/utils/enums.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +8,7 @@ class HomeTabNotifier with ChangeNotifier {
   String _index = 'All';
 
   String get index => _index;
+
 
   void setIndex(String index) {
     _index = index;

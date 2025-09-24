@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/src/products/controller/color_sized_notifier.dart';
@@ -19,6 +21,7 @@ class ProductSizesWidget extends StatelessWidget {
             context.read<ProductsNotifier>().product!.sizes.length,
             (index) {
               String s = context.read<ProductsNotifier>().product!.sizes[index];
+              log(s);
               return GestureDetector(
                 onTap: () {
                   controller.setSize(s);

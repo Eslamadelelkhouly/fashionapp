@@ -24,7 +24,7 @@ class ProductColorWidget extends StatelessWidget {
             (index) {
               String c =
                   context.read<ProductsNotifier>().product!.colors[index];
-              log(c.toString());
+              log(c);
               return GestureDetector(
                 onTap: () {
                   controller.setColor(c);

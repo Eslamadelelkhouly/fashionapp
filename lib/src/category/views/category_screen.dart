@@ -25,7 +25,7 @@ class CategoryScreen extends HookWidget {
     final error = result.error;
     if (isLoading) {
       return const Scaffold(
-        body:  const ListShimmer(),
+        body: const ListShimmer(),
       );
     }
     return Scaffold(
@@ -45,7 +45,7 @@ class CategoryScreen extends HookWidget {
             onTap: () {
               context
                   .read<CategoryNotifier>()
-                  .setCategory(category.title, index);
+                  .setCategory(category.title, index + 1);
               context.push('/category');
             },
             leading: CircleAvatar(

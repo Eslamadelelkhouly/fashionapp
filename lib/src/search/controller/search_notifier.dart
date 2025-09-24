@@ -21,7 +21,7 @@ class SearchNotifier with ChangeNotifier {
     notifyListeners();
   }
 
-  void clear() {
+  void clearResults() {
     _results = [];
   }
 

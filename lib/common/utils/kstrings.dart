@@ -16,6 +16,8 @@ class AppText {
       'Please select size and color to proceed';
   static const String kSearch = 'Search';
 
+  static const String kSearchHint = 'Search For latest Fashion';
+
   static const String kProfilePic =
       'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?_gl=1*grlr0s*_ga*MTUzNDE0NDc4MS4xNzUyNTI2MTgy*_ga_8JE65Q40S6*czE3NTUxMDM5MzUkbzIkZzEkdDE3NTUxMDM5NDckajQ4JGwwJGgw';
 

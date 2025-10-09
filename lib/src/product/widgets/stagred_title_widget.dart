@@ -6,6 +6,7 @@ import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/src/product/models/product_model.dart';
 import 'package:fashionapp/src/products/controller/products_notifier.dart';
+import 'package:fashionapp/src/wishlist/controller/wishlist_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,16 +48,23 @@ class StagredTitleWidget extends StatelessWidget {
                     Positioned(
                       right: 10.h,
                       top: 10.h,
-                      child: GestureDetector(
-                        onTap: onTab,
-                        child: CircleAvatar(
-                          backgroundColor: Kolors.kSecondaryLight,
-                          child: Icon(
-                            AntDesign.heart,
-                            color: Kolors.kRed,
-                            size: 18,
-                          ),
-                        ),
+                      child: Consumer<WishlistNotifier>(
+                        builder: (context, wishlistnotifier, state) {
+                          return GestureDetector(
+                            onTap: onTab,
+                            child: CircleAvatar(
+                              backgroundColor: Kolors.kSecondaryLight,
+                              child: Icon(
+                                AntDesign.heart,
+                                color: wishlistnotifier.wishlist
+                                        .contains(product.id)
+                                    ? Kolors.kRed
+                                    : Kolors.kGray,
+                                size: 18,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],

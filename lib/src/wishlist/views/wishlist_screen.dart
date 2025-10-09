@@ -4,6 +4,7 @@ import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/src/auth/views/login_screen.dart';
 import 'package:fashionapp/src/product/widgets/explore_product.dart';
+import 'package:fashionapp/src/wishlist/widget/whislist_body.dart';
 import 'package:flutter/material.dart';
 
 class WishlistScreen extends StatelessWidget {
@@ -24,7 +25,7 @@ class WishlistScreen extends StatelessWidget {
           style: appStyle(16, Kolors.kPrimary, FontWeight.bold),
         ),
       ),
-      body: ExploreProduct(),
+      body: WhislistBody(),
     );
   }
 }

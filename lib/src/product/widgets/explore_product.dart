@@ -1,11 +1,11 @@
 import 'package:fashionapp/common/services/storage.dart';
 import 'package:fashionapp/common/widgets/login_bottom_sheet.dart';
 import 'package:fashionapp/common/widgets/shimmers/list_shimmer.dart';
-import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/const/resource.dart';
 import 'package:fashionapp/src/home/controller/home_tab_notifier.dart';
 import 'package:fashionapp/src/product/widgets/stagred_title_widget.dart';
 import 'package:fashionapp/src/products/hooks/fetch_products.dart';
+import 'package:fashionapp/src/wishlist/controller/wishlist_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -59,7 +59,9 @@ class ExploreProduct extends HookWidget {
                         if (accessToken == null) {
                           loginBottomSheet(context);
                         } else {
-                          // handel wishlist action
+                          context
+                              .read<WishlistNotifier>()
+                              .addRemoveWishlist(products[index].id, () {});
                         }
                       },
                     ),

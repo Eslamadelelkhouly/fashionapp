@@ -49,8 +49,10 @@ class SearchNotifier with ChangeNotifier {
 
   void searchFunction(String searchKey) async {
     setLoading(true);
+    setSearchKey(searchKey);
     Uri url = Uri.parse(
-        'https://a7da2c1d5ade.ngrok-free.app/api/search/?q=${searchKey}');
+        'https://fc676bed094a.ngrok-free.app/api/products/search/?q=${searchKey}');
+    log(url.toString());
     try {
       var response = await http.get(url);
       log("response : ${response.toString()}");
@@ -59,6 +61,8 @@ class SearchNotifier with ChangeNotifier {
         setresults(data);
         log(data.toString());
         setLoading(false);
+        log("response status: ${response.statusCode}");
+        log("response body: ${response.body}");
       }
     } catch (e) {
       setError(e.toString());

@@ -62,7 +62,7 @@ class CustomAppBar extends StatelessWidget {
         preferredSize: Size.fromHeight(55.h),
         child: GestureDetector(
           onTap: () {
-            context.go('/search');
+            context.push('/search');
           },
           child: Padding(
             padding: EdgeInsets.symmetric(

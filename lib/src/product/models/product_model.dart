@@ -40,11 +40,11 @@ class Products {
   factory Products.fromJson(Map<String, dynamic> json) => Products(
         id: json["id"],
         title: json["title"],
-        price: json["price"]?.toDouble(),
-        description: json["description"],
-        isFeatured: json["is_featured"],
-        clothesType: json["clothesType"],
-        ratings: json["ratings"]?.toDouble(),
+        price: json["price"]?.toDouble() ?? 0.0,
+        description: json["description"] ?? "",
+        isFeatured: json["is_featured"] ?? false,
+        clothesType: json["clothesType"] ?? "",
+        ratings: json["ratings"]?.toDouble() ?? 0.0,
         colors: json["colors"] == null
             ? []
             : List<String>.from(json["colors"].map((x) => x)),
@@ -55,8 +55,8 @@ class Products {
             ? []
             : List<String>.from(json["sizes"].map((x) => x)),
         createdAt: DateTime.parse(json["created_at"]),
-        category: json["category"],
-        brand: json["brand"],
+        category: json["category"] ?? 0, // default 0
+        brand: json["brand"] ?? 0, // default 0
       );
 
   Map<String, dynamic> toJson() => {

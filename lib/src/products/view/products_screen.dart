@@ -16,6 +16,7 @@ import 'package:fashionapp/src/products/widgets/product_sizes_widget.dart';
 import 'package:fashionapp/src/products/controller/products_notifier.dart';
 import 'package:fashionapp/src/products/widgets/expanded_text.dart';
 import 'package:fashionapp/src/products/widgets/similar_product.dart';
+import 'package:fashionapp/src/wishlist/controller/wishlist_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -43,15 +44,26 @@ class ProductsScreen extends StatelessWidget {
               pinned: true,
               leading: const AppBackButton(),
               actions: [
-                GestureDetector(
-                  child: const CircleAvatar(
-                    backgroundColor: Kolors.kSecondaryLight,
-                    child: Icon(
-                      AntDesign.heart,
-                      color: Kolors.kRed,
-                      size: 18,
-                    ),
-                  ),
+                Consumer<WishlistNotifier>(
+                  builder: (context, wishlistnotifier, state) {
+                    return GestureDetector(
+                      onTap: () {
+                        wishlistnotifier.addRemoveWishlist(
+                            productnotifier.product!.id, () {});
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Kolors.kSecondaryLight,
+                        child: Icon(
+                          AntDesign.heart,
+                          color: wishlistnotifier.wishlist
+                                  .contains(productnotifier.product!.id)
+                              ? Kolors.kRed
+                              : Kolors.kGray,
+                          size: 18,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
               flexibleSpace: FlexibleSpaceBar(

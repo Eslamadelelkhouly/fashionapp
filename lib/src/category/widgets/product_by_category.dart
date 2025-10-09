@@ -7,6 +7,7 @@ import 'package:fashionapp/src/category/controller/category_notifier.dart';
 import 'package:fashionapp/src/hook/fetch_home_categories.dart';
 import 'package:fashionapp/src/hook/fetch_products_by_category.dart';
 import 'package:fashionapp/src/product/widgets/stagred_title_widget.dart';
+import 'package:fashionapp/src/wishlist/controller/wishlist_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -61,7 +62,9 @@ class ProductsByCategory extends HookWidget {
                         if (accessToken == null) {
                           loginBottomSheet(context);
                         } else {
-                          // handel wishlist action
+                          context
+                              .read<WishlistNotifier>()
+                              .addRemoveWishlist(products[index].id, () {});
                         }
                       },
                     ),

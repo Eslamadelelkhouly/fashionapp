@@ -1,40 +1,40 @@
+import 'dart:developer';
+
 import 'package:fashionapp/common/services/storage.dart';
 import 'package:fashionapp/common/widgets/empty_screen_widget.dart';
 import 'package:fashionapp/common/widgets/login_bottom_sheet.dart';
-import 'package:fashionapp/const/constants.dart';
-import 'package:fashionapp/src/home/controller/home_tab_notifier.dart';
+import 'package:fashionapp/common/widgets/shimmers/list_shimmer.dart';
 import 'package:fashionapp/src/product/widgets/stagred_title_widget.dart';
-import 'package:fashionapp/src/products/controller/products_notifier.dart';
-import 'package:fashionapp/src/products/hooks/fetch_products.dart';
-import 'package:fashionapp/src/products/hooks/fetch_similar_product.dart';
 import 'package:fashionapp/src/wishlist/controller/wishlist_notifier.dart';
+import 'package:fashionapp/src/wishlist/hook/fetch_wishlist.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
-class SimilarProduct extends HookWidget {
-  const SimilarProduct({super.key});
+class WhislistBody extends HookWidget {
+  const WhislistBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     String? accessToken = Storage().getString('accessToken');
-    final result =
-        fetchsimilarproduct(context.read<ProductsNotifier>().product!.category);
+    final result = fetchWishlist();
     final products = result.products;
     final isLoading = result.isLoading;
+    final refetch = result.refetch;
     final error = result.error;
+
     if (isLoading) {
-      return const Center(
-        child: CircularProgressIndicator.adaptive(),
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
+        child: ListShimmer(),
       );
     }
     return products.isEmpty
-        ? const EmptyScreenWidget()
+        ? EmptyScreenWidget()
         : Padding(
-            padding: EdgeInsets.all(8.h),
+            padding: EdgeInsets.symmetric(horizontal: 2.h),
             child: StaggeredGrid.count(
               crossAxisCount: 4,
               mainAxisSpacing: 4,
@@ -54,9 +54,10 @@ class SimilarProduct extends HookWidget {
                         if (accessToken == null) {
                           loginBottomSheet(context);
                         } else {
+                          log('button favourite');
                           context
                               .read<WishlistNotifier>()
-                              .addRemoveWishlist(products[index].id, () {});
+                              .addRemoveWishlist(products[index].id, refetch);
                         }
                       },
                     ),

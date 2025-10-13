@@ -3,6 +3,7 @@ import 'package:fashionapp/common/utils/environment.dart';
 import 'package:fashionapp/common/utils/kstrings.dart';
 import 'package:fashionapp/src/auth/controller/auth_notifier.dart';
 import 'package:fashionapp/src/auth/controller/password_notifier.dart';
+import 'package:fashionapp/src/cart/controller/cart_notifier.dart';
 import 'package:fashionapp/src/category/controller/category_notifier.dart';
 import 'package:fashionapp/src/entrypoint/controller/bottom_tab_notifier.dart';
 import 'package:fashionapp/src/home/controller/home_tab_notifier.dart';
@@ -57,6 +58,9 @@ void main() async {
         ),
         ChangeNotifierProvider<WishlistNotifier>(
           create: (_) => WishlistNotifier(),
+        ),
+        ChangeNotifierProvider<CartNotifier>(
+          create: (_) => CartNotifier(),
         ),
       ],
       child: const MyApp(),

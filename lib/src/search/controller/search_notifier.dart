@@ -51,7 +51,7 @@ class SearchNotifier with ChangeNotifier {
     setLoading(true);
     setSearchKey(searchKey);
     Uri url = Uri.parse(
-        'https://fc676bed094a.ngrok-free.app/api/products/search/?q=${searchKey}');
+        'https://f5ecc3f9774b.ngrok-free.app/api/products/search/?q=${searchKey}');
     log(url.toString());
     try {
       var response = await http.get(url);

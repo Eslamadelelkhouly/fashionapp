@@ -15,7 +15,7 @@ FetchProduct fetchProductsByCategories(int categoryId) {
 
     try {
       Uri url = Uri.parse(
-          'https://f5ecc3f9774b.ngrok-free.app/api/products/category/?category=$categoryId');
+          'https://cce2060bc083.ngrok-free.app/api/products/category/?category=$categoryId');
 
       final response = await http.get(url);
 

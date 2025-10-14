@@ -15,7 +15,7 @@ FetchProduct fetchProducts(QueryType queryType) {
 
   Future<void> FetchData() async {
     isLoading.value = true;
-    String baseUrl = 'https://f5ecc3f9774b.ngrok-free.app';
+    String baseUrl = 'https://cce2060bc083.ngrok-free.app';
     Uri url;
 
     try {

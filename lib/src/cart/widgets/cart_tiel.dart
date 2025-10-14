@@ -1,6 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fashionapp/common/utils/kcolors.dart';
+import 'package:fashionapp/common/widgets/app_style.dart';
+import 'package:fashionapp/common/widgets/reusable_text.dart';
+import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/src/cart/controller/cart_notifier.dart';
 import 'package:fashionapp/src/cart/models/cart_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 
 class CartTiel extends StatelessWidget {
@@ -13,7 +20,100 @@ class CartTiel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CartNotifier>(
       builder: (context, cartnotifier, child) {
-        return GestureDetector();
+        return GestureDetector(
+          onTap: () {},
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 8.h),
+            child: Container(
+              width: ScreenUtil().scaleWidth,
+              height: 90.h,
+              decoration: BoxDecoration(
+                color: Kolors.kWhite,
+                borderRadius: kRadiusAll,
+              ),
+              child: Row(
+                children: [
+                  SizedBox(
+                    height: 85.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Kolors.kWhite,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(12),
+                              topRight: Radius.circular(12),
+                            ),
+                          ),
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: kRadiusAll,
+                                child: SizedBox(
+                                  width: 76.w,
+                                  height: double.infinity,
+                                  child: CachedNetworkImage(
+                                    imageUrl: cartModel.product.imageUrl[0],
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                child: GestureDetector(
+                                  onTap: onDelete,
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: Icon(
+                                      AntDesign.delete,
+                                      size: 14,
+                                      color: Kolors.kWhite,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ReusableText(
+                              text: cartModel.product.title.toUpperCase(),
+                              style:
+                                  appStyle(12, Kolors.kDark, FontWeight.normal),
+                            ),
+                            ReusableText(
+                              text:
+                                  'Size: ${cartModel.product.sizes} || Color: ${cartModel.product.colors}'
+                                      .toUpperCase(),
+                              style:
+                                  appStyle(12, Kolors.kDark, FontWeight.normal),
+                            ),
+                            SizedBox(
+                              width: ScreenUtil().screenWidth * 0.5,
+                              child: Text(
+                                cartModel.product.description,
+                                maxLines: 2,
+                                textAlign: TextAlign.justify,
+                                style: appStyle(
+                                    9, Kolors.kGray, FontWeight.normal),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
       },
     );
   }

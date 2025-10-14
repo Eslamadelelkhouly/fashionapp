@@ -37,7 +37,7 @@ class AutthNotifier with ChangeNotifier {
     try {
       log(data.toJson().toString());
       var url =
-          Uri.parse('https://f5ecc3f9774b.ngrok-free.app/auth/token/login');
+          Uri.parse('https://cce2060bc083.ngrok-free.app/auth/token/login');
       var response = await http.post(
         url,
         headers: {
@@ -66,7 +66,7 @@ class AutthNotifier with ChangeNotifier {
     setRLoading();
     try {
       log(data.toJson().toString());
-      var url = Uri.parse('https://f5ecc3f9774b.ngrok-free.app/auth/users/');
+      var url = Uri.parse('https://cce2060bc083.ngrok-free.app/auth/users/');
       log(url.toString());
       var response = await http.post(
         url,
@@ -101,7 +101,7 @@ class AutthNotifier with ChangeNotifier {
   void getUser(String accessToken, BuildContext ctx) async {
     setLoading(true);
     try {
-      var url = Uri.parse('https://f5ecc3f9774b.ngrok-free.app/auth/users/me');
+      var url = Uri.parse('https://cce2060bc083.ngrok-free.app/auth/users/me');
       var response = await http.get(
         url,
         headers: {

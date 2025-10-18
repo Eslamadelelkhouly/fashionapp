@@ -89,7 +89,7 @@ class CartTiel extends StatelessWidget {
                             ),
                             ReusableText(
                               text:
-                                  'Size: ${cartModel.product.sizes} || Color: ${cartModel.product.colors}'
+                                  'Size: ${cartModel.size} || Color: ${cartModel.color}'
                                       .toUpperCase(),
                               style:
                                   appStyle(12, Kolors.kDark, FontWeight.normal),
@@ -105,6 +105,46 @@ class CartTiel extends StatelessWidget {
                               ),
                             ),
                           ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 6.0, left: 3),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            width: 35.w,
+                            height: 20.h,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Kolors.kPrimary,
+                                width: 0.5,
+                              ),
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                            child: ReusableText(
+                              text: "* ${cartModel.quantity}",
+                              style: appStyle(
+                                12,
+                                Kolors.kPrimary,
+                                FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 6.w),
+                          child: ReusableText(
+                            text:
+                                "\$ ${(cartModel.quantity * cartModel.product.price).toStringAsFixed(2)}",
+                            style:
+                                appStyle(12, Kolors.kPrimary, FontWeight.w600),
+                          ),
                         ),
                       ],
                     ),

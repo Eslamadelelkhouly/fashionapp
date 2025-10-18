@@ -17,7 +17,7 @@ FetchProduct fetchWishlist() {
 
     try {
       Uri url =
-          Uri.parse('https://cce2060bc083.ngrok-free.app/api/wishlist/me/');
+          Uri.parse('https://b824cd0a8271.ngrok-free.app/api/wishlist/me/');
 
       final response = await http.get(
         url,

@@ -15,7 +15,7 @@ FetchProduct fetchsimilarproduct(int categoryId) {
 
     try {
       Uri url = Uri.parse(
-          'https://cce2060bc083.ngrok-free.app/api/products/recommedations/?category=$categoryId');
+          'https://c5dd61e45072.ngrok-free.app/api/products/recommedations/?category=$categoryId');
 
       final response = await http.get(url);
 

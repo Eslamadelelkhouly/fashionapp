@@ -13,7 +13,7 @@ FetchCategories fetchHomeCategories() {
     isLoading.value = true;
     try {
       Uri url = Uri.parse(
-          'https://c5dd61e45072.ngrok-free.app/api/products/home-categories/');
+          'https://4cb510477446.ngrok-free.app/api/products/home-categories/');
       final response = await http.get(url);
       if (response.statusCode == 200) {
         categories.value = categoriesFromJson(response.body);

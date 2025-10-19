@@ -19,7 +19,7 @@ FetchCartCount fetchCategories() {
 
     try {
       Uri url =
-          Uri.parse('https://c5dd61e45072.ngrok-free.app/api/cart/count/');
+          Uri.parse('https://4cb510477446.ngrok-free.app/api/cart/count/');
       final response = await http.get(
         url,
         headers: {

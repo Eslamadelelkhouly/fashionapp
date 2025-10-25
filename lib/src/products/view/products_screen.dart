@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fashionapp/common/services/storage.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
@@ -9,6 +11,8 @@ import 'package:fashionapp/common/widgets/login_bottom_sheet.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/main.dart';
+import 'package:fashionapp/src/cart/controller/cart_notifier.dart';
+import 'package:fashionapp/src/cart/models/cart_model.dart';
 import 'package:fashionapp/src/products/controller/color_sized_notifier.dart';
 import 'package:fashionapp/src/products/widgets/product_bottom_bar.dart';
 import 'package:fashionapp/src/products/widgets/product_color_widget.dart';
@@ -220,7 +224,18 @@ class ProductsScreen extends StatelessWidget {
                   'Error Adding to cart',
                   true,
                 );
-              } else {}
+              } else {
+                var data = CartModel(
+                  id: context.read<ProductsNotifier>().product!.id,
+                  product: context.read<ProductsNotifier>().product!,
+                  quantity: 1,
+                  size: context.read<ColorSizedNotifier>().size,
+                  color: context.read<ColorSizedNotifier>().color,
+                );
+                Map<String, dynamic> cartmap = data.toJson();
+                log(cartmap.toString());
+                context.read<CartNotifier>().addToCart(cartmap, context);
+              }
             }
           },
           price: productnotifier.product!.price.toStringAsFixed(2),

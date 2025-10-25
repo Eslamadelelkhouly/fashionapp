@@ -23,14 +23,18 @@ class CartTiel extends StatelessWidget {
     return Consumer<CartNotifier>(
       builder: (context, cartnotifier, child) {
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            cartnotifier.selectedOrDeselected(cartModel.id, cartModel);
+          },
           child: Padding(
             padding: EdgeInsets.only(bottom: 8.h),
             child: Container(
               width: ScreenUtil().scaleWidth,
               height: 90.h,
               decoration: BoxDecoration(
-                color: Kolors.kWhite,
+                color: !cartnotifier.selectedCartItemIds.contains(cartModel.id)
+                    ? Kolors.kWhite
+                    : Kolors.kPrimaryLight,
                 borderRadius: kRadiusAll,
               ),
               child: Row(
@@ -56,7 +60,7 @@ class CartTiel extends StatelessWidget {
                                   width: 76.w,
                                   height: double.infinity,
                                   child: CachedNetworkImage(
-                                    imageUrl: cartModel.product.imageUrl[0],
+                                    imageUrl: cartModel.product.imageUrls[0],
                                     fit: BoxFit.cover,
                                   ),
                                 ),

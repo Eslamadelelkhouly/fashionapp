@@ -1,10 +1,7 @@
 import 'dart:developer';
-
 import 'package:fashionapp/common/utils/enums.dart';
-import 'package:fashionapp/src/category/models/category_models.dart';
-import 'package:fashionapp/src/hook/result/categories_results.dart';
-import 'package:fashionapp/src/hook/result/category_products_results.dart';
 import 'package:fashionapp/src/product/models/product_model.dart';
+import 'package:fashionapp/src/hook/result/category_products_results.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,10 +9,12 @@ FetchProduct fetchProducts(QueryType queryType) {
   final products = useState<List<Products>>([]);
   final isLoading = useState(false);
   final error = useState<String?>(null);
+  final isMounted = useIsMounted(); // ✅ للتحقق قبل التحديث
 
-  Future<void> FetchData() async {
+  Future<void> fetchData() async {
+    if (!isMounted()) return; // حماية إضافية
     isLoading.value = true;
-    String baseUrl = 'https://4cb510477446.ngrok-free.app';
+    String baseUrl = 'https://d3d681df2788.ngrok-free.app';
     Uri url;
 
     try {
@@ -40,35 +39,39 @@ FetchProduct fetchProducts(QueryType queryType) {
           break;
         default:
           url = Uri.parse('$baseUrl/api/products/popular/');
-          break;
       }
 
       final response = await http.get(url);
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && isMounted()) {
         products.value = productsFromJson(response.body);
-        log(response.body.toString());
+        log('✅ Products fetched successfully');
       }
     } catch (e) {
-      error.value = e.toString();
-      log(e.toString());
+      if (isMounted()) {
+        // ✅ تأكد إن الـ widget لسه mounted
+        error.value = e.toString();
+        log('❌ Error: $e');
+      }
     } finally {
-      isLoading.value = false;
+      if (isMounted()) {
+        // ✅ تأكد إنك ما تحدثش بعد الـ dispose
+        isLoading.value = false;
+      }
     }
   }
 
-  useEffect(
-    () {
-      FetchData();
-      return;
-    },
-    [queryType.index],
-  );
+  useEffect(() {
+    fetchData();
+    return null; // ✅ لازم ترجع null مش void
+  }, [queryType.index]);
 
   void refetch() {
-    isLoading.value = true;
-    FetchData();
-    log('REFETCH PRODUCTS');
+    if (isMounted()) {
+      isLoading.value = true;
+      fetchData();
+      log('🔄 Refetch products');
+    }
   }
 
   return FetchProduct(

@@ -1,15 +1,17 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
+import 'package:fashionapp/src/cart/hooks/fetch_cart_count.dart';
 import 'package:fashionapp/src/cart/views/cart_screen.dart';
 import 'package:fashionapp/src/entrypoint/controller/bottom_tab_notifier.dart';
 import 'package:fashionapp/src/home/views/home_screen.dart';
 import 'package:fashionapp/src/profile/views/profile_screen.dart';
 import 'package:fashionapp/src/wishlist/views/wishlist_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 
-class AppEntryPoint extends StatelessWidget {
+class AppEntryPoint extends HookWidget {
   AppEntryPoint({super.key});
 
   List<Widget> pages = const [
@@ -20,6 +22,8 @@ class AppEntryPoint extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    final result = fetchCartCount(context);
+    final count = result.cartCountModel;
     return Consumer<TabNotifier>(
       builder: (context, TabIndexNotifier, state) {
         return Scaffold(
@@ -77,7 +81,7 @@ class AppEntryPoint extends StatelessWidget {
                       BottomNavigationBarItem(
                         icon: TabIndexNotifier.currentIndex == 2
                             ? Badge(
-                                label: Text('9'),
+                                label: Text(count.cartCount.toString()),
                                 child: Icon(
                                   MaterialCommunityIcons.shopping,
                                   color: Kolors.kPrimary,
@@ -85,7 +89,7 @@ class AppEntryPoint extends StatelessWidget {
                                 ),
                               )
                             : Badge(
-                                label: Text('9'),
+                                label: Text(count.cartCount.toString()),
                                 child: Icon(
                                   MaterialCommunityIcons.shopping_outline,
                                   size: 24,

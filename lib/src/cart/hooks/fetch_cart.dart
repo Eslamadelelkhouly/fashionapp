@@ -17,7 +17,7 @@ FetchCart fetchCart() {
     String? accessToken = Storage().getString('accessToken');
 
     try {
-      Uri url = Uri.parse('https://4cb510477446.ngrok-free.app/api/cart/me/');
+      Uri url = Uri.parse('https://d3d681df2788.ngrok-free.app/api/cart/me/');
       log('🔑 Token: $accessToken');
 
       final response = await http.get(

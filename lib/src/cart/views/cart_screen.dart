@@ -1,9 +1,11 @@
 import 'package:fashionapp/common/services/storage.dart';
+import 'package:fashionapp/common/utils/app_routes.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/password_field.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/common/widgets/shimmers/list_shimmer.dart';
+import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/src/auth/views/login_screen.dart';
 import 'package:fashionapp/src/cart/controller/cart_notifier.dart';
 import 'package:fashionapp/src/cart/hooks/fetch_cart.dart';
@@ -12,6 +14,7 @@ import 'package:fashionapp/src/home/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends HookWidget {
@@ -53,6 +56,9 @@ class CartScreen extends HookWidget {
               final cart = carts[i];
               return CartTiel(
                 cartModel: cart,
+                onDelete: () {
+                  context.read<CartNotifier>().deleteCart(cart.id, refetch);
+                },
                 onUpdate: () {
                   context.read<CartNotifier>().updateCart(cart.id, refetch);
                 },
@@ -60,6 +66,43 @@ class CartScreen extends HookWidget {
             },
           ),
         ),
+      ),
+      bottomNavigationBar: Consumer<CartNotifier>(
+        builder: (context, cartnotifier, child) {
+          return GestureDetector(
+            onTap: () {
+              context.push('/checkout');
+            },
+            child: cartnotifier.selectedCartItem.isNotEmpty
+                ? Container(
+                    height: 130,
+                    padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 90.h),
+                    decoration: BoxDecoration(
+                        borderRadius: kRadiusTop, color: Kolors.kPrimaryLight),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ReusableText(
+                            text: 'Click to Checkout',
+                            style: appStyle(15, Kolors.kWhite, FontWeight.w600),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: ReusableText(
+                              text:
+                                  '\$ ${cartnotifier.totalPrice.toStringAsFixed(2)}',
+                              style:
+                                  appStyle(15, Kolors.kWhite, FontWeight.w600)),
+                        ),
+                      ],
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          );
+        },
       ),
     );
   }

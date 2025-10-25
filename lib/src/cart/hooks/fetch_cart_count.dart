@@ -1,14 +1,18 @@
 import 'dart:convert';
 
 import 'package:fashionapp/common/services/storage.dart';
+import 'package:fashionapp/common/widgets/password_field.dart';
+import 'package:fashionapp/src/cart/controller/cart_notifier.dart';
 import 'package:fashionapp/src/cart/hooks/results/cart_count_result.dart';
 import 'package:fashionapp/src/cart/models/cart_count_model.dart';
 import 'package:fashionapp/src/category/models/category_models.dart';
 import 'package:fashionapp/src/hook/result/categories_results.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
-FetchCartCount fetchCategories() {
+FetchCartCount fetchCartCount(BuildContext context) {
   final initalData = CartCountModel(cartCount: 0);
   final count = useState<CartCountModel>(initalData);
   final isLoading = useState(false);
@@ -19,7 +23,7 @@ FetchCartCount fetchCategories() {
 
     try {
       Uri url =
-          Uri.parse('https://4cb510477446.ngrok-free.app/api/cart/count/');
+          Uri.parse('https://d3d681df2788.ngrok-free.app/api/cart/count/');
       final response = await http.get(
         url,
         headers: {
@@ -52,6 +56,8 @@ FetchCartCount fetchCategories() {
     isLoading.value = true;
     FetchData();
   }
+
+  context.read<CartNotifier>().setRefetchCount(refetch);
 
   return FetchCartCount(
       cartCountModel: count.value,

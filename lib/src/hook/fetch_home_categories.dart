@@ -1,7 +1,5 @@
 import 'package:fashionapp/src/category/models/category_models.dart';
 import 'package:fashionapp/src/hook/result/categories_results.dart';
-import 'package:fashionapp/src/hook/result/category_products_results.dart';
-import 'package:fashionapp/src/product/models/product_model.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,38 +7,47 @@ FetchCategories fetchHomeCategories() {
   final categories = useState<List<Categories>>([]);
   final isLoading = useState(false);
   final error = useState<String?>(null);
-  Future<void> FetchData() async {
+  final isMounted = useIsMounted(); // ✅ للتحقق إذا الـ widget لسه موجود
+
+  Future<void> fetchData() async {
     isLoading.value = true;
     try {
       Uri url = Uri.parse(
-          'https://4cb510477446.ngrok-free.app/api/products/home-categories/');
+          'https://d3d681df2788.ngrok-free.app/api/products/home-categories/');
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        categories.value = categoriesFromJson(response.body);
+        if (isMounted()) {
+          // ✅ تأكد إن الـ widget لسه موجود
+          categories.value = categoriesFromJson(response.body);
+        }
       }
     } catch (e) {
-      error.value = e.toString();
+      if (isMounted()) {
+        error.value = e.toString();
+      }
     } finally {
-      isLoading.value = false;
+      if (isMounted()) {
+        isLoading.value = false;
+      }
     }
   }
 
-  useEffect(
-    () {
-      FetchData();
-      return;
-    },
-    const [],
-  );
+  useEffect(() {
+    fetchData();
+    return null; // ✅ مهم ترجع null مش void
+  }, const []);
 
   void refetch() {
-    isLoading.value = true;
-    FetchData();
+    if (isMounted()) {
+      isLoading.value = true;
+      fetchData();
+    }
   }
 
   return FetchCategories(
-      categories: categories.value,
-      isLoading: isLoading.value,
-      error: error.value,
-      refetch: refetch);
+    categories: categories.value,
+    isLoading: isLoading.value,
+    error: error.value,
+    refetch: refetch,
+  );
 }

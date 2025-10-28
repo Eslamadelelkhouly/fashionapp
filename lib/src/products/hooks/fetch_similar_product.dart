@@ -15,7 +15,7 @@ FetchProduct fetchsimilarproduct(int categoryId) {
 
     try {
       Uri url = Uri.parse(
-          'https://d3d681df2788.ngrok-free.app/api/products/recommedations/?category=$categoryId');
+          'https://industrial-returning-documents-recognize.trycloudflare.com/api/products/recommedations/?category=$categoryId');
 
       final response = await http.get(url);
 

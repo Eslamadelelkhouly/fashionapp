@@ -36,8 +36,8 @@ class AutthNotifier with ChangeNotifier {
     setLoading(true);
     try {
       log(data.toJson().toString());
-      var url =
-          Uri.parse('https://d3d681df2788.ngrok-free.app/auth/token/login');
+      var url = Uri.parse(
+          'https://industrial-returning-documents-recognize.trycloudflare.com/auth/token/login');
       var response = await http.post(
         url,
         headers: {
@@ -66,7 +66,8 @@ class AutthNotifier with ChangeNotifier {
     setRLoading();
     try {
       log(data.toJson().toString());
-      var url = Uri.parse('https://d3d681df2788.ngrok-free.app/auth/users/');
+      var url = Uri.parse(
+          'https://industrial-returning-documents-recognize.trycloudflare.com/auth/users/');
       log(url.toString());
       var response = await http.post(
         url,
@@ -101,7 +102,8 @@ class AutthNotifier with ChangeNotifier {
   void getUser(String accessToken, BuildContext ctx) async {
     setLoading(true);
     try {
-      var url = Uri.parse('https://d3d681df2788.ngrok-free.app/auth/users/me');
+      var url = Uri.parse(
+          'https://industrial-returning-documents-recognize.trycloudflare.com/auth/users/me');
       var response = await http.get(
         url,
         headers: {

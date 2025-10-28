@@ -14,7 +14,8 @@ FetchProduct fetchProducts(QueryType queryType) {
   Future<void> fetchData() async {
     if (!isMounted()) return; // حماية إضافية
     isLoading.value = true;
-    String baseUrl = 'https://d3d681df2788.ngrok-free.app';
+    String baseUrl =
+        'https://industrial-returning-documents-recognize.trycloudflare.com';
     Uri url;
 
     try {

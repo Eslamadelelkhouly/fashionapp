@@ -51,7 +51,7 @@ class SearchNotifier with ChangeNotifier {
     setLoading(true);
     setSearchKey(searchKey);
     Uri url = Uri.parse(
-        'https://d3d681df2788.ngrok-free.app/api/products/search/?q=${searchKey}');
+        'https://industrial-returning-documents-recognize.trycloudflare.com/api/products/search/?q=${searchKey}');
     log(url.toString());
     try {
       var response = await http.get(url);

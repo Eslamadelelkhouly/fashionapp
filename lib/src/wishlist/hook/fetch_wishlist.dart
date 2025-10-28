@@ -16,8 +16,8 @@ FetchProduct fetchWishlist() {
     String? accessToken = Storage().getString('accessToken');
 
     try {
-      Uri url =
-          Uri.parse('https://d3d681df2788.ngrok-free.app/api/wishlist/me/');
+      Uri url = Uri.parse(
+          'https://please-part-dosage-gaming.trycloudflare.com/api/wishlist/me/');
 
       final response = await http.get(
         url,

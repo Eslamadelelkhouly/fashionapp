@@ -1,24 +1,23 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:fashionapp/common/services/storage.dart';
-import 'package:fashionapp/src/cart/hooks/results/cart_result.dart';
-import 'package:fashionapp/src/cart/models/cart_model.dart';
+import 'package:fashionapp/src/adresses/hooks/results/default_results.dart';
+import 'package:fashionapp/src/adresses/model/address_model.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
 
-FetchCart fetchCart() {
-  final cart = useState<List<CartModel>>([]);
+FetchDefaultAddress fetchDefaultAddress() {
+  final address = useState<AddressModel?>(null);
   final isLoading = useState(false);
   final error = useState<String?>(null);
+  String? accessToken = Storage().getString('accessToken');
 
   Future<void> fetchData() async {
     isLoading.value = true;
-    String? accessToken = Storage().getString('accessToken');
 
     try {
       Uri url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/api/cart/me/');
+          'https://industrial-returning-documents-recognize.trycloudflare.com/api/address/me/');
       log('🔑 Token: $accessToken');
 
       final response = await http.get(
@@ -33,17 +32,18 @@ FetchCart fetchCart() {
         log('🟢 Response: ${response.body}');
         final decoded = jsonDecode(response.body);
 
-        List<dynamic> jsonList = [];
-        if (decoded is List) {
-          jsonList = decoded;
-        } else if (decoded is Map && decoded.containsKey('results')) {
-          jsonList = decoded['results'];
-        } else if (decoded is Map && decoded.containsKey('data')) {
-          jsonList = decoded['data'];
+        // الحالة الأولى: الـ API بيرجع object واحد
+        if (decoded is Map<String, dynamic>) {
+          address.value = AddressModel.fromJson(decoded);
+        }
+        // الحالة الثانية: الـ API بيرجع قائمة فيها عنوان واحد
+        else if (decoded is List && decoded.isNotEmpty) {
+          address.value = AddressModel.fromJson(decoded.first);
+        } else {
+          error.value = 'Invalid response format';
         }
 
-        cart.value = jsonList.map((e) => CartModel.fromJson(e)).toList();
-        log('✅ Cart fetched: ${cart.value.length} items');
+        log('✅ Address fetched successfully');
       } else {
         error.value = 'Failed: ${response.statusCode}';
       }
@@ -56,12 +56,15 @@ FetchCart fetchCart() {
   }
 
   useEffect(() {
-    fetchData();
+    if (accessToken != null) {
+      fetchData();
+    }
+
     return;
   }, const []);
 
-  return FetchCart(
-    listCartModel: cart.value,
+  return FetchDefaultAddress(
+    addressModel: address.value,
     isLoading: isLoading.value,
     error: error.value,
     refetch: fetchData,

@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:fashionapp/common/services/storage.dart';
-import 'package:fashionapp/src/cart/hooks/results/cart_result.dart';
-import 'package:fashionapp/src/cart/models/cart_model.dart';
+import 'package:fashionapp/src/adresses/hooks/results/ad_list_results.dart';
+import 'package:fashionapp/src/adresses/model/address_model.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
 
-FetchCart fetchCart() {
-  final cart = useState<List<CartModel>>([]);
+FetchAddress fetchAddress() {
+  final addresses = useState<List<AddressModel>>([]);
   final isLoading = useState(false);
   final error = useState<String?>(null);
 
@@ -18,7 +17,7 @@ FetchCart fetchCart() {
 
     try {
       Uri url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/api/cart/me/');
+          'https://industrial-returning-documents-recognize.trycloudflare.com/api/address/addresslist/');
       log('🔑 Token: $accessToken');
 
       final response = await http.get(
@@ -33,17 +32,21 @@ FetchCart fetchCart() {
         log('🟢 Response: ${response.body}');
         final decoded = jsonDecode(response.body);
 
-        List<dynamic> jsonList = [];
+        List<AddressModel> parsedList = [];
+
+        // الحالة الأولى: الـ API بيرجع قائمة كاملة
         if (decoded is List) {
-          jsonList = decoded;
-        } else if (decoded is Map && decoded.containsKey('results')) {
-          jsonList = decoded['results'];
-        } else if (decoded is Map && decoded.containsKey('data')) {
-          jsonList = decoded['data'];
+          parsedList = decoded.map((e) => AddressModel.fromJson(e)).toList();
+        }
+        // الحالة الثانية: بيرجع object واحد
+        else if (decoded is Map<String, dynamic>) {
+          parsedList = [AddressModel.fromJson(decoded)];
+        } else {
+          error.value = 'Invalid response format';
         }
 
-        cart.value = jsonList.map((e) => CartModel.fromJson(e)).toList();
-        log('✅ Cart fetched: ${cart.value.length} items');
+        addresses.value = parsedList;
+        log('✅ Address fetched successfully (${addresses.value.length} items)');
       } else {
         error.value = 'Failed: ${response.statusCode}';
       }
@@ -60,8 +63,8 @@ FetchCart fetchCart() {
     return;
   }, const []);
 
-  return FetchCart(
-    listCartModel: cart.value,
+  return FetchAddress(
+    addressModels: addresses.value,
     isLoading: isLoading.value,
     error: error.value,
     refetch: fetchData,

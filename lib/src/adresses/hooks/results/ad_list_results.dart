@@ -4,14 +4,14 @@ import 'package:fashionapp/src/cart/models/cart_model.dart';
 import 'package:fashionapp/src/category/models/category_models.dart';
 import 'package:flutter/material.dart';
 
-class FetchDefaultAddress {
-  final AddressModel? addressModel;
+class FetchAddress {
+  final List<AddressModel> addressModels;
   final bool isLoading;
   final String? error;
   final VoidCallback refetch;
 
-  FetchDefaultAddress({
-    required this.addressModel,
+  FetchAddress({
+    required this.addressModels,
     required this.isLoading,
     required this.error,
     required this.refetch,

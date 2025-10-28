@@ -56,7 +56,8 @@ class WishlistNotifier with ChangeNotifier {
   void addRemoveWishlist(int id, Function refetch) async {
     final accessToken = Storage().getString('accessToken');
     try {
-      String baseurl = 'https://d3d681df2788.ngrok-free.app/';
+      String baseurl =
+          'https://industrial-returning-documents-recognize.trycloudflare.com/';
       Uri url = Uri.parse('${baseurl}api/wishlist/toggle/?id=$id');
       log(url.toString());
 

@@ -11,7 +11,7 @@ FetchCategories fetchCategories() {
     isLoading.value = true;
     try {
       Uri url = Uri.parse(
-          'https://d3d681df2788.ngrok-free.app/api/products/categories/');
+          'https://industrial-returning-documents-recognize.trycloudflare.com/api/products/categories/');
       final response = await http.get(url);
       if (response.statusCode == 200) {
         categories.value = categoriesFromJson(response.body);

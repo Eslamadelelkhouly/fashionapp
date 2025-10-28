@@ -13,7 +13,7 @@ FetchCategories fetchHomeCategories() {
     isLoading.value = true;
     try {
       Uri url = Uri.parse(
-          'https://d3d681df2788.ngrok-free.app/api/products/home-categories/');
+          'https://industrial-returning-documents-recognize.trycloudflare.com/api/products/home-categories/');
       final response = await http.get(url);
       if (response.statusCode == 200) {
         if (isMounted()) {

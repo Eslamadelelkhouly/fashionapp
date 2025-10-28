@@ -22,8 +22,8 @@ FetchCartCount fetchCartCount(BuildContext context) {
     isLoading.value = true;
 
     try {
-      Uri url =
-          Uri.parse('https://d3d681df2788.ngrok-free.app/api/cart/count/');
+      Uri url = Uri.parse(
+          'https://industrial-returning-documents-recognize.trycloudflare.com/api/cart/count/');
       final response = await http.get(
         url,
         headers: {

@@ -15,7 +15,7 @@ FetchProduct fetchsimilarproduct(int categoryId) {
 
     try {
       Uri url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/api/products/recommedations/?category=$categoryId');
+          'https://pos-firefox-relatives-denver.trycloudflare.com/api/products/recommedations/?category=$categoryId');
 
       final response = await http.get(url);
 

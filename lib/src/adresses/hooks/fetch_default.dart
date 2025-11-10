@@ -3,21 +3,29 @@ import 'dart:developer';
 import 'package:fashionapp/common/services/storage.dart';
 import 'package:fashionapp/src/adresses/hooks/results/default_results.dart';
 import 'package:fashionapp/src/adresses/model/address_model.dart';
+import 'package:fashionapp/src/adresses/controllers/address_notifier.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
-FetchDefaultAddress fetchDefaultAddress() {
+FetchDefaultAddress fetchDefaultAddress(BuildContext context) {
   final address = useState<AddressModel?>(null);
   final isLoading = useState(false);
   final error = useState<String?>(null);
-  String? accessToken = Storage().getString('accessToken');
+  final accessToken = Storage().getString('accessToken');
 
   Future<void> fetchData() async {
+    // تأكد إن الصفحة لسه موجودة
+    if (!context.mounted) return;
+
     isLoading.value = true;
 
     try {
-      Uri url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/api/address/me/');
+      final url = Uri.parse(
+        'https://pos-firefox-relatives-denver.trycloudflare.com/api/address/me/',
+      );
+
       log('🔑 Token: $accessToken');
 
       final response = await http.get(
@@ -28,19 +36,25 @@ FetchDefaultAddress fetchDefaultAddress() {
         },
       );
 
+      // بعد الاستجابة، تأكد إن الـ widget لسه موجود
+      if (!context.mounted) return;
+
       if (response.statusCode == 200) {
         log('🟢 Response: ${response.body}');
         final decoded = jsonDecode(response.body);
 
-        // الحالة الأولى: الـ API بيرجع object واحد
         if (decoded is Map<String, dynamic>) {
           address.value = AddressModel.fromJson(decoded);
-        }
-        // الحالة الثانية: الـ API بيرجع قائمة فيها عنوان واحد
-        else if (decoded is List && decoded.isNotEmpty) {
+        } else if (decoded is List && decoded.isNotEmpty) {
           address.value = AddressModel.fromJson(decoded.first);
         } else {
           error.value = 'Invalid response format';
+        }
+
+        // ✅ خزّن العنوان في AddressNotifier
+        if (address.value != null && context.mounted) {
+          Provider.of<AddressNotifier>(context, listen: false)
+              .setAddress(address.value!);
         }
 
         log('✅ Address fetched successfully');
@@ -49,18 +63,22 @@ FetchDefaultAddress fetchDefaultAddress() {
       }
     } catch (e) {
       log('❌ Error: $e');
-      error.value = e.toString();
+      if (context.mounted) {
+        error.value = e.toString();
+      }
     } finally {
-      isLoading.value = false;
+      if (context.mounted) {
+        isLoading.value = false;
+      }
     }
   }
 
+  // تشغيل الفنكشن أول مرة فقط بعد بناء الصفحة
   useEffect(() {
     if (accessToken != null) {
       fetchData();
     }
-
-    return;
+    return null; // لازم return null في useEffect
   }, const []);
 
   return FetchDefaultAddress(

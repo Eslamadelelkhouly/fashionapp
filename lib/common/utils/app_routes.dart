@@ -1,3 +1,4 @@
+import 'package:fashionapp/src/adresses/views/add_address.dart';
 import 'package:fashionapp/src/auth/views/login_screen.dart';
 import 'package:fashionapp/src/auth/views/register_screen.dart';
 import 'package:fashionapp/src/category/views/category_page.dart';
@@ -8,7 +9,7 @@ import 'package:fashionapp/src/onboarding/views/onboarding__page.dart';
 import 'package:fashionapp/src/products/view/products_screen.dart';
 import 'package:fashionapp/src/profile/views/orders_screen.dart';
 import 'package:fashionapp/src/profile/views/policy_screen.dart';
-import 'package:fashionapp/src/profile/views/shipping_address.dart';
+import 'package:fashionapp/src/adresses/views/shipping_address.dart';
 import 'package:fashionapp/src/search/views/search_view.dart';
 import 'package:fashionapp/src/splashscreen/views/splashscreen__page.dart';
 import 'package:flutter/material.dart';
@@ -78,10 +79,10 @@ final GoRouter _router = GoRouter(
       builder: (context, state) => const ShippingAddress(),
     ),
 
-    // GoRoute(
-    //   path: '/addresses',
-    //   builder: (context, state) => const AddressesListPage(),
-    // ),
+    GoRoute(
+      path: '/addresses',
+      builder: (context, state) => const AddAddress(),
+    ),
 
     //  GoRoute(
     //   path: '/notifications',

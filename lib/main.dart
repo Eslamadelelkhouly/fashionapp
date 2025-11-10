@@ -1,6 +1,7 @@
 import 'package:fashionapp/common/utils/app_routes.dart';
 import 'package:fashionapp/common/utils/environment.dart';
 import 'package:fashionapp/common/utils/kstrings.dart';
+import 'package:fashionapp/src/adresses/controllers/address_notifier.dart';
 import 'package:fashionapp/src/auth/controller/auth_notifier.dart';
 import 'package:fashionapp/src/auth/controller/password_notifier.dart';
 import 'package:fashionapp/src/cart/controller/cart_notifier.dart';
@@ -18,7 +19,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,6 +62,9 @@ void main() async {
         ),
         ChangeNotifierProvider<CartNotifier>(
           create: (_) => CartNotifier(),
+        ),
+        ChangeNotifierProvider<AddressNotifier>(
+          create: (_) => AddressNotifier(),
         ),
       ],
       child: const MyApp(),

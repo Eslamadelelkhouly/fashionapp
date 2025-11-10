@@ -15,7 +15,7 @@ FetchProduct fetchProductsByCategories(int categoryId) {
 
     try {
       Uri url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/api/products/category/?category=$categoryId');
+          'https://pos-firefox-relatives-denver.trycloudflare.com/api/products/category/?category=$categoryId');
 
       final response = await http.get(url);
 

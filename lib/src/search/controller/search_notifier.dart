@@ -51,7 +51,7 @@ class SearchNotifier with ChangeNotifier {
     setLoading(true);
     setSearchKey(searchKey);
     Uri url = Uri.parse(
-        'https://industrial-returning-documents-recognize.trycloudflare.com/api/products/search/?q=${searchKey}');
+        'https://pos-firefox-relatives-denver.trycloudflare.com/api/products/search/?q=${searchKey}');
     log(url.toString());
     try {
       var response = await http.get(url);

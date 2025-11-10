@@ -55,7 +55,7 @@ class CartNotifier with ChangeNotifier {
 
   Future<void> deleteCart(int id, void Function() refetch) async {
     String? accessToken = Storage().getString('accessToken');
-    const baseurl = 'https://industrial-returning-documents-recognize.trycloudflare.com/';
+    const baseurl = 'https://pos-firefox-relatives-denver.trycloudflare.com/';
     try {
       Uri url = Uri.parse('${baseurl}api/cart/delete/?id=$id');
 
@@ -80,7 +80,7 @@ class CartNotifier with ChangeNotifier {
 
   Future<void> updateCart(int id, void Function() refetch) async {
     String? accessToken = Storage().getString('accessToken');
-    const baseurl = 'https://industrial-returning-documents-recognize.trycloudflare.com/';
+    const baseurl = 'https://pos-firefox-relatives-denver.trycloudflare.com/';
     try {
       Uri url = Uri.parse('${baseurl}api/cart/update/?id=$id&count=$qty');
       final response = await http.patch(
@@ -102,7 +102,7 @@ class CartNotifier with ChangeNotifier {
 
   Future<void> addToCart(Map<String, dynamic> data, BuildContext ctx) async {
     String? accessToken = Storage().getString('accessToken');
-    const baseurl = 'https://industrial-returning-documents-recognize.trycloudflare.com/';
+    const baseurl = 'https://pos-firefox-relatives-denver.trycloudflare.com/';
     try {
       Uri url = Uri.parse('${baseurl}api/cart/add/');
       final response = await http.post(

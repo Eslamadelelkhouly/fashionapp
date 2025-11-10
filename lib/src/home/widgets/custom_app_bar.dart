@@ -16,7 +16,7 @@ class CustomAppBar extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rztl = fetchDefaultAddress();
+    final rztl = fetchDefaultAddress(context);
 
     final address =
         rztl?.addressModel?.address ?? 'Please select your location';

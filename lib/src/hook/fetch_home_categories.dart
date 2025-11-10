@@ -13,7 +13,7 @@ FetchCategories fetchHomeCategories() {
     isLoading.value = true;
     try {
       Uri url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/api/products/home-categories/');
+          'https://pos-firefox-relatives-denver.trycloudflare.com/api/products/home-categories/');
       final response = await http.get(url);
       if (response.statusCode == 200) {
         if (isMounted()) {

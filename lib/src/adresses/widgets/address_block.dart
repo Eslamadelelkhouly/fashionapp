@@ -6,13 +6,13 @@ import 'package:fashionapp/src/adresses/widgets/address_tiel.dart';
 import 'package:flutter/material.dart';
 
 class AddressBlock extends StatelessWidget {
-  const AddressBlock({super.key, this.addCartModel});
-  final AddressModel? addCartModel;
+  const AddressBlock({super.key, this.addressModel});
+  final AddressModel? addressModel;
 
   @override
   Widget build(BuildContext context) {
     // ✅ إذا مفيش عنوان، نظهر رسالة بدل الكراش
-    if (addCartModel == null) {
+    if (addressModel == null) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -50,7 +50,7 @@ class AddressBlock extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         AddressTiel(
-          addressModel: addCartModel!,
+          addressModel: addressModel!,
           isCheckout: true,
         ),
       ],

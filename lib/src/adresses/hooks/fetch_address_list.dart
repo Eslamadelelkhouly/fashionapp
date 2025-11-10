@@ -10,14 +10,17 @@ FetchAddress fetchAddress() {
   final addresses = useState<List<AddressModel>>([]);
   final isLoading = useState(false);
   final error = useState<String?>(null);
+  final isMounted = useIsMounted(); // ✅ Add this
 
   Future<void> fetchData() async {
+    if (!isMounted()) return;
+
     isLoading.value = true;
     String? accessToken = Storage().getString('accessToken');
 
     try {
       Uri url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/api/address/addresslist/');
+          'https://pos-firefox-relatives-denver.trycloudflare.com/api/address/addresslist/');
       log('🔑 Token: $accessToken');
 
       final response = await http.get(
@@ -34,33 +37,30 @@ FetchAddress fetchAddress() {
 
         List<AddressModel> parsedList = [];
 
-        // الحالة الأولى: الـ API بيرجع قائمة كاملة
         if (decoded is List) {
           parsedList = decoded.map((e) => AddressModel.fromJson(e)).toList();
-        }
-        // الحالة الثانية: بيرجع object واحد
-        else if (decoded is Map<String, dynamic>) {
+        } else if (decoded is Map<String, dynamic>) {
           parsedList = [AddressModel.fromJson(decoded)];
         } else {
-          error.value = 'Invalid response format';
+          if (isMounted()) error.value = 'Invalid response format';
         }
 
-        addresses.value = parsedList;
-        log('✅ Address fetched successfully (${addresses.value.length} items)');
+        if (isMounted()) addresses.value = parsedList;
+        log('✅ Address fetched successfully (${parsedList.length} items)');
       } else {
-        error.value = 'Failed: ${response.statusCode}';
+        if (isMounted()) error.value = 'Failed: ${response.statusCode}';
       }
     } catch (e) {
       log('❌ Error: $e');
-      error.value = e.toString();
+      if (isMounted()) error.value = e.toString();
     } finally {
-      isLoading.value = false;
+      if (isMounted()) isLoading.value = false;
     }
   }
 
   useEffect(() {
     fetchData();
-    return;
+    return; // no cleanup
   }, const []);
 
   return FetchAddress(

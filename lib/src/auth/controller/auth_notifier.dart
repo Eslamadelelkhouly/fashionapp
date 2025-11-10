@@ -37,7 +37,7 @@ class AutthNotifier with ChangeNotifier {
     try {
       log(data.toJson().toString());
       var url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/auth/token/login');
+          'https://pos-firefox-relatives-denver.trycloudflare.com/auth/token/login');
       var response = await http.post(
         url,
         headers: {
@@ -67,7 +67,7 @@ class AutthNotifier with ChangeNotifier {
     try {
       log(data.toJson().toString());
       var url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/auth/users/');
+          'https://pos-firefox-relatives-denver.trycloudflare.com/auth/users/');
       log(url.toString());
       var response = await http.post(
         url,
@@ -103,7 +103,7 @@ class AutthNotifier with ChangeNotifier {
     setLoading(true);
     try {
       var url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/auth/users/me');
+          'https://pos-firefox-relatives-denver.trycloudflare.com/auth/users/me');
       var response = await http.get(
         url,
         headers: {

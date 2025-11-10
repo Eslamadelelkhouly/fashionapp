@@ -23,7 +23,7 @@ FetchCartCount fetchCartCount(BuildContext context) {
 
     try {
       Uri url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/api/cart/count/');
+          'https://pos-firefox-relatives-denver.trycloudflare.com/api/cart/count/');
       final response = await http.get(
         url,
         headers: {

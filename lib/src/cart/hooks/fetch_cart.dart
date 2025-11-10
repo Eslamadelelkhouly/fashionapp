@@ -18,7 +18,7 @@ FetchCart fetchCart() {
 
     try {
       Uri url = Uri.parse(
-          'https://industrial-returning-documents-recognize.trycloudflare.com/api/cart/me/');
+          'https://pos-firefox-relatives-denver.trycloudflare.com/api/cart/me/');
       log('🔑 Token: $accessToken');
 
       final response = await http.get(

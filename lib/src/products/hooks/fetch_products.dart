@@ -14,8 +14,7 @@ FetchProduct fetchProducts(QueryType queryType) {
   Future<void> fetchData() async {
     if (!isMounted()) return; // حماية إضافية
     isLoading.value = true;
-    String baseUrl =
-        'https://industrial-returning-documents-recognize.trycloudflare.com';
+    String baseUrl = 'https://pos-firefox-relatives-denver.trycloudflare.com';
     Uri url;
 
     try {

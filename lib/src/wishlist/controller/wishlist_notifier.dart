@@ -57,7 +57,7 @@ class WishlistNotifier with ChangeNotifier {
     final accessToken = Storage().getString('accessToken');
     try {
       String baseurl =
-          'https://pos-firefox-relatives-denver.trycloudflare.com/';
+          'https://midi-circuit-enjoy-directory.trycloudflare.com/';
       Uri url = Uri.parse('${baseurl}api/wishlist/toggle/?id=$id');
       log(url.toString());
 

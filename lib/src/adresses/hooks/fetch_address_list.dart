@@ -20,7 +20,7 @@ FetchAddress fetchAddress() {
 
     try {
       Uri url = Uri.parse(
-          'https://pos-firefox-relatives-denver.trycloudflare.com/api/address/addresslist/');
+          'https://midi-circuit-enjoy-directory.trycloudflare.com/api/address/addresslist/');
       log('🔑 Token: $accessToken');
 
       final response = await http.get(

@@ -17,7 +17,7 @@ FetchProduct fetchWishlist() {
 
     try {
       Uri url = Uri.parse(
-          'https://pos-firefox-relatives-denver.trycloudflare.com/api/wishlist/me/');
+          'https://midi-circuit-enjoy-directory.trycloudflare.com/api/wishlist/me/');
 
       final response = await http.get(
         url,

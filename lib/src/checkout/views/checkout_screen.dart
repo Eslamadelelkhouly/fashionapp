@@ -8,6 +8,7 @@ import 'package:fashionapp/src/adresses/controllers/address_notifier.dart';
 import 'package:fashionapp/src/adresses/hooks/fetch_default.dart';
 import 'package:fashionapp/src/adresses/widgets/address_block.dart';
 import 'package:fashionapp/src/cart/controller/cart_notifier.dart';
+import 'package:fashionapp/src/checkout/views/payment.dart';
 import 'package:fashionapp/src/checkout/widget/checkout_tiel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -31,7 +32,7 @@ class CheckoutScreen extends HookWidget {
       appBar: AppBar(
         leading: AppBackButton(onTap: () {
           context.read<AddressNotifier>().clearAddress();
-          context.pop();  
+          context.pop();
         }),
         title: ReusableText(
           text: AppText.kCheckout,
@@ -39,42 +40,49 @@ class CheckoutScreen extends HookWidget {
         ),
         centerTitle: true,
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 14.w),
-        children: [
-          if (isLoading)
-            const Center(child: CircularProgressIndicator())
-          else if (address != null)
-            AddressBlock(addressModel: address)
-          else
-            GestureDetector(
-              onTap: () => context.push('/address'),
-              child: Container(
-                padding: EdgeInsets.all(16.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Kolors.kPrimary),
-                ),
-                child: ReusableText(
-                  text: 'Please select your location',
-                  style: appStyle(14, Kolors.kPrimary, FontWeight.w500),
-                ),
-              ),
-            ),
-          SizedBox(height: 10.h),
-          if (cartNotifier.selectedCartItem.isNotEmpty)
-            SizedBox(
-              height: ScreenUtil().screenHeight * 0.5,
-              child: Column(
-                children: List.generate(
-                  cartNotifier.selectedCartItem.length,
-                  (i) => CheckoutTiel(
-                    cartModel: cartNotifier.selectedCartItem[i],
-                  ),
-                ),
-              ),
-            ),
-        ],
+      body: Consumer<CartNotifier>(
+        builder: (context, cartnotitifer, child) {
+          return cartNotifier.paymenturl.contains('https://checkout.stripe.com')
+              ? const PaymentWebView()
+              : ListView(
+                  padding: EdgeInsets.symmetric(horizontal: 14.w),
+                  children: [
+                    if (isLoading)
+                      const Center(child: CircularProgressIndicator())
+                    else if (address != null)
+                      AddressBlock(addressModel: address)
+                    else
+                      GestureDetector(
+                        onTap: () => context.push('/address'),
+                        child: Container(
+                          padding: EdgeInsets.all(16.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Kolors.kPrimary),
+                          ),
+                          child: ReusableText(
+                            text: 'Please select your location',
+                            style:
+                                appStyle(14, Kolors.kPrimary, FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    SizedBox(height: 10.h),
+                    if (cartNotifier.selectedCartItem.isNotEmpty)
+                      SizedBox(
+                        height: ScreenUtil().screenHeight * 0.5,
+                        child: Column(
+                          children: List.generate(
+                            cartNotifier.selectedCartItem.length,
+                            (i) => CheckoutTiel(
+                              cartModel: cartNotifier.selectedCartItem[i],
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+        },
       ),
       bottomNavigationBar: Consumer<CartNotifier>(
         builder: (context, cartNotitifer, child) {

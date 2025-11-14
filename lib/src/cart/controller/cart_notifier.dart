@@ -55,7 +55,7 @@ class CartNotifier with ChangeNotifier {
 
   Future<void> deleteCart(int id, void Function() refetch) async {
     String? accessToken = Storage().getString('accessToken');
-    const baseurl = 'https://pos-firefox-relatives-denver.trycloudflare.com/';
+    const baseurl = 'https://midi-circuit-enjoy-directory.trycloudflare.com/';
     try {
       Uri url = Uri.parse('${baseurl}api/cart/delete/?id=$id');
 
@@ -80,7 +80,7 @@ class CartNotifier with ChangeNotifier {
 
   Future<void> updateCart(int id, void Function() refetch) async {
     String? accessToken = Storage().getString('accessToken');
-    const baseurl = 'https://pos-firefox-relatives-denver.trycloudflare.com/';
+    const baseurl = 'https://midi-circuit-enjoy-directory.trycloudflare.com/';
     try {
       Uri url = Uri.parse('${baseurl}api/cart/update/?id=$id&count=$qty');
       final response = await http.patch(
@@ -102,7 +102,7 @@ class CartNotifier with ChangeNotifier {
 
   Future<void> addToCart(Map<String, dynamic> data, BuildContext ctx) async {
     String? accessToken = Storage().getString('accessToken');
-    const baseurl = 'https://pos-firefox-relatives-denver.trycloudflare.com/';
+    const baseurl = 'https://midi-circuit-enjoy-directory.trycloudflare.com/';
     try {
       Uri url = Uri.parse('${baseurl}api/cart/add/');
       final response = await http.post(
@@ -159,5 +159,20 @@ class CartNotifier with ChangeNotifier {
       tp += item.product.price * item.quantity;
     }
     return tp;
+  }
+
+  String _paymentUrl = '';
+  String get paymenturl => _paymentUrl;
+
+  void setPaymentUrl(String url) {
+    _paymentUrl = url;
+    notifyListeners();
+  }
+
+  String _success = '';
+  String get success => _success;
+
+  void setSuccessUrl(String url) {
+    _success = url;
   }
 }

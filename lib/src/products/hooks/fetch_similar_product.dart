@@ -15,7 +15,7 @@ FetchProduct fetchsimilarproduct(int categoryId) {
 
     try {
       Uri url = Uri.parse(
-          'https://pos-firefox-relatives-denver.trycloudflare.com/api/products/recommedations/?category=$categoryId');
+          'https://midi-circuit-enjoy-directory.trycloudflare.com/api/products/recommedations/?category=$categoryId');
 
       final response = await http.get(url);
 

@@ -23,7 +23,7 @@ FetchDefaultAddress fetchDefaultAddress(BuildContext context) {
 
     try {
       final url = Uri.parse(
-        'https://pos-firefox-relatives-denver.trycloudflare.com/api/address/me/',
+        'https://midi-circuit-enjoy-directory.trycloudflare.com/api/address/me/',
       );
 
       log('🔑 Token: $accessToken');

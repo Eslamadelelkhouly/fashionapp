@@ -14,7 +14,7 @@ FetchProduct fetchProducts(QueryType queryType) {
   Future<void> fetchData() async {
     if (!isMounted()) return; // حماية إضافية
     isLoading.value = true;
-    String baseUrl = 'https://pos-firefox-relatives-denver.trycloudflare.com';
+    String baseUrl = 'https://midi-circuit-enjoy-directory.trycloudflare.com';
     Uri url;
 
     try {

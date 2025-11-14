@@ -77,7 +77,7 @@ class AddressNotifier with ChangeNotifier {
 
     try {
       Uri url = Uri.parse(
-          'https://pos-firefox-relatives-denver.trycloudflare.com/api/address/default/?id=$id');
+          'https://midi-circuit-enjoy-directory.trycloudflare.com/api/address/default/?id=$id');
       log('Default URL: $url');
 
       final response = await http.patch(
@@ -117,7 +117,7 @@ class AddressNotifier with ChangeNotifier {
 
     try {
       Uri url = Uri.parse(
-          'https://pos-firefox-relatives-denver.trycloudflare.com/api/address/delete/?id=$id');
+          'https://midi-circuit-enjoy-directory.trycloudflare.com/api/address/delete/?id=$id');
       log('Delete URL: $url');
 
       final response = await http.delete(
@@ -154,7 +154,7 @@ class AddressNotifier with ChangeNotifier {
 
     try {
       Uri url = Uri.parse(
-          'https://pos-firefox-relatives-denver.trycloudflare.com/api/address/add/');
+          'https://midi-circuit-enjoy-directory.trycloudflare.com/api/address/add/');
       log('Delete URL: $url');
 
       final response = await http.post(
